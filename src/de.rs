@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::error::{Error, Result};
+use core::convert::TryFrom;
 use serde::de::{self, Deserialize, DeserializeSeed, IntoDeserializer, Visitor};
-use std::convert::TryFrom;
 
 /// Deserializes a `&[u8]` into a type.
 ///
@@ -205,7 +205,7 @@ impl<'de> Deserializer<'de> {
 
     fn parse_string(&mut self) -> Result<&'de str> {
         let slice = self.parse_bytes()?;
-        std::str::from_utf8(slice).map_err(|_| Error::Utf8)
+        core::str::from_utf8(slice).map_err(|_| Error::Utf8)
     }
 
     fn enter_named_container(&mut self, name: &'static str) -> Result<()> {

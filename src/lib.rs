@@ -303,10 +303,22 @@
 //! # Ok(())}
 //! ```
 
+#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(not(feature = "std"), feature(error_in_core))]
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
+
 mod de;
 mod error;
 mod ser;
 pub mod test_helpers;
+
+#[cfg(feature = "std")]
+pub(crate) use std::io;
+
+#[cfg(not(feature = "std"))]
+mod io;
 
 /// Variable length sequences in BCS are limited to max length of 2^31 - 1.
 pub const MAX_SEQUENCE_LENGTH: usize = (1 << 31) - 1;
