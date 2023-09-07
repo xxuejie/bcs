@@ -315,10 +315,10 @@ mod ser;
 pub mod test_helpers;
 
 #[cfg(feature = "std")]
-pub(crate) use std::io;
+pub use std::io;
 
 #[cfg(not(feature = "std"))]
-mod io;
+pub mod io;
 
 /// Variable length sequences in BCS are limited to max length of 2^31 - 1.
 pub const MAX_SEQUENCE_LENGTH: usize = (1 << 31) - 1;

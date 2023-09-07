@@ -1,3 +1,4 @@
+///! Just enough code from std::io to support bcs in no_std mode
 use alloc::{
     format,
     string::{String, ToString},
